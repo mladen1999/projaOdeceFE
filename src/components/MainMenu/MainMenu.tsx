@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Nav } from 'react-bootstrap';
-import { HashRouter, Switch, Route, Link } from 'react-router-dom';
+import { HashRouter, Link } from 'react-router-dom';
 
 export class MainMenuItem {
     text: string = '';
