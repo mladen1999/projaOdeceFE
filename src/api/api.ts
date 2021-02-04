@@ -24,10 +24,10 @@ export default function api(
         .then(res => responseHandler(res, resolve))
         .catch(async err => {
             //
-            if(err.response.status === 401) { // Nemamo validan token
+            if (err.response.status === 401) { // Nemamo validan token
                 const newToken = await refreshToken();
     
-                if(!newToken) {
+                if (!newToken) {
                     const response: ApiResponse = {
                         status: 'login',
                         data: null,
@@ -78,43 +78,11 @@ async function responseHandler(
         return resolve(response);
     }
 
-    // Nepovoljan ishod kada aplikacija ne odradi posao
-    /*
-    if(res.data.statusCode < 0) {
-        const response: ApiResponse = {
-            status: 'ok',
-            data: res.data,
-        };
-
-        return resolve(response);
-    }
-    */
-   /////////
    const response: ApiResponse = {
     status: 'ok',
     data: res.data,
     };
     return resolve(response);
-   /*
-   let response: ApiResponse;
-
-   if(res.data.statusCode < 0) {
-       response = {
-           status: 'login',
-           data: null,
-       };
-   } else {
-       response = {
-           status: 'ok',
-           data: res.data,
-       };
-   }
-   resolve(response);
-   */
-   /////////
-
-    // Povoljan ishod ako je sve kako treba
-    //resolve(res.data);
 }
 
 function getToken(): string {
