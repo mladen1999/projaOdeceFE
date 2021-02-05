@@ -13,7 +13,10 @@ export default class ContactPage extends React.Component {
                         <FontAwesomeIcon icon={ faPhone } /> Contact details
                         </Card.Title>
                         <Card.Text>
-                            Contact details will be show here...
+                            Radno Vreme: Pon-Ned - 10:00 - 22:00 <br />
+                            Adresa: Knjazevacka 36, 18000 Nis <br />
+                            email: mladenvts@gmail.com <br />
+                            Telefon: 018 156488
                         </Card.Text>
                     </Card.Body>
                 </Card>

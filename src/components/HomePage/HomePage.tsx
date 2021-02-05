@@ -87,7 +87,7 @@ class HomePage extends React.Component {
                 <Card>
                     <Card.Body>
                         <Card.Title>
-                            <FontAwesomeIcon icon={ faListAlt } /> Top level categories
+                            <FontAwesomeIcon icon={ faListAlt } /> Online Prodavnica Odece: Kategorije
                         </Card.Title>
 
                         <Row>
