@@ -14,8 +14,8 @@ export default function api(
             data: JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json',
-                'Autorization': getToken(),
-            },
+                'Authorization': getToken()
+            }
         };
 
 
@@ -38,7 +38,7 @@ export default function api(
     
                 saveToken(newToken);
     
-                requestData.headers['Autorization'] = getToken();
+                requestData.headers['Authorization'] = getToken();
     
                 return await repeatRequest(requestData, resolve);
             }
@@ -47,7 +47,7 @@ export default function api(
                 status: 'error',
                 data: err
             };
-
+            
             resolve(response);
         });
     });
@@ -64,7 +64,7 @@ async function responseHandler(
 ) {
     // HTTP error statusi
     // Nepovoljan ishod kada server ne odradi posao
-    if(res.status < 200 || res.status >= 300) {
+    if (res.status < 200 || res.status >= 300) {
         // STATUS CODE 401 - Bad Token:
         // TODO: Refresh tokena i pokusati ponovo
         //       Ne mozemo da osvezimo token, preusmeriti na login!
@@ -78,10 +78,11 @@ async function responseHandler(
         return resolve(response);
     }
 
-   const response: ApiResponse = {
-    status: 'ok',
-    data: res.data,
+    const response: ApiResponse = {
+        status: 'ok',
+        data: res.data,
     };
+
     return resolve(response);
 }
 
@@ -89,6 +90,8 @@ function getToken(): string {
     const token = localStorage.getItem('api_token');
     return 'Berer ' + token;
 }
+
+
 
 export function saveToken(token: string) {
     localStorage.setItem('api_token', token);
@@ -135,29 +138,29 @@ async function repeatRequest(
     resolve: (value: ApiResponse) => void
 ) {
     axios(requestData)
-        .then(res => {
-            let response: ApiResponse;
-            if(res.status === 401) {
-                response = {
-                    status: 'login',
-                    data: null,
-                };
-            } else {
-                response = {
-                    status: 'ok',
-                    data: res,
-                };
-            }
+    .then(res => {
+        let response: ApiResponse;
 
-            return resolve(response);
-
-        })
-        .catch(err => {
-            const response: ApiResponse = {
-                status: 'error',
-                data: err,
+        if (res.status === 401) {
+            response = {
+                status: 'login',
+                data: null,
             };
-    
-            return resolve(response);
-        });
+        } else {
+            response = {
+                status: 'ok',
+                data: res,
+            };
+        }
+
+        return resolve(response);
+    })
+    .catch(err => {
+        const response: ApiResponse = {
+            status: 'error',
+            data: err,
+        };
+
+        return resolve(response);
+    });
 }
