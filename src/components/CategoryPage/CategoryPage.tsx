@@ -7,6 +7,7 @@ import api, { ApiResponse } from '../../api/api';
 import ArticleType from '../../types/ArticleType';
 import { Link, Redirect } from 'react-router-dom';
 import { ApiConfig } from '../../config/api.config';
+import SingleArticlePreview from '../SingleArticlePreview/SingleArticlePreview';
 
 interface CategoryPageProperties {
     match: {
@@ -340,35 +341,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
 
     }
 
-    private singleArticle(article: ArticleType) {
-        return (
-            <Col lg="4" md="6" sm="6" xs="12" >
-                <Card className="mb-3">
-                    <Card.Body>
-                        <Card.Header>
-                            <img alt={ article.name }
-                                 src={ ApiConfig.PHOTO_PATH + 'small/' + article.imageUrl }
-                                 className="w-100"
-                                 />
-                        </Card.Header>
-                        <Card.Title>
-                            <strong>{ article.name }</strong>
-                        </Card.Title>
-                        <Card.Text>
-                            { article.excerpt }
-                        </Card.Text>
-                        <Card.Text>
-                            Price: { Number(article.price).toFixed(2) } EUR
-                        </Card.Text>
-                        <Link to={ `/article/${ article.articleId }` }
-                              className="btn btn-primary btn-block btn-sm">
-                            Open article page
-                        </Link>
-                    </Card.Body>
-                </Card>
-            </Col>
-        );
-    }
+    
 
     private singleCategory(category: CategoryType) {
         return (
@@ -385,6 +358,13 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
                     </Card.Body>
                 </Card>
             </Col>
+        );
+    }
+
+    private singleArticle(article: ArticleType) {
+        return (
+            <SingleArticlePreview article={article} />
+            
         );
     }
 
