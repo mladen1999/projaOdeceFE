@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CategoryType from '../../types/CategoryType';
 import { Link, Redirect } from 'react-router-dom';
 import api, { ApiResponse } from '../../api/api';
+import logo from './thb.png';
 
 interface HomePageState {
     isUserLoggedIn: boolean;
@@ -86,11 +87,11 @@ class HomePage extends React.Component {
             <Container>
                 <Card>
                     <Card.Body>
-                        <Card.Title>
+                        <img src={logo} className="w-100"/>
+                        <Card.Title style={{width: '100%',textAlign: 'center'}}>
                             <FontAwesomeIcon icon={ faListAlt } /> Online Prodavnica Odece: Kategorije
                         </Card.Title>
-
-                        <Row>
+                        <Row style={{flex:1,justifyContent: "center",alignItems: "center"}}>
                             { this.state.categories.map(this.singleCategory) }
                         </Row>
                     </Card.Body>
